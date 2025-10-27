@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 27 oct. 2025 à 17:32
+-- Généré le : lun. 27 oct. 2025 à 17:45
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.1.25
 
@@ -20,6 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `disney_stream_clone`
 --
+DROP DATABASE IF EXISTS `disney_stream_clone`;
+CREATE DATABASE IF NOT EXISTS `disney_stream_clone` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `disney_stream_clone`;
 
 -- --------------------------------------------------------
 
