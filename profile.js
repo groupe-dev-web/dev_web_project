@@ -1,64 +1,50 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  // Charger les infos du profil depuis le backend PHP
   try {
-    const response = await fetch("http://localhost/project/api/get_user.php", {
-      credentials: "include",
+    const response = await fetch("../backend/get_user.php", {
+      credentials: "include", // important pour envoyer le cookie PHP
     });
-    const user = await response.json();
 
-    if (user && user.email) {
-      document.getElementById("user-name").textContent = user.name;
-      document.getElementById("user-email").textContent = user.email;
-      document.querySelector(".avatar").textContent = user.name.charAt(0).toUpperCase();
-    } else {
-      window.location.href = "login.html";
+    const data = await response.json();
+
+    if (data.error) {
+      window.location.href = "login-register.html";
+      return;
     }
-  } catch (err) {
-    console.error("Erreur lors du chargement de l'utilisateur :", err);
-    window.location.href = "login.html";
-  }
 
-  // Exemple statique pour les stats et films
-  const stats = {
-    watched: 3,
-    watchlist: 2,
-    owned: 1,
-    selling: 0,
-  };
+    const { user, films } = data;
 
-  document.getElementById("watched-count").textContent = stats.watched;
-  document.getElementById("watchlist-count").textContent = stats.watchlist;
-  document.getElementById("owned-count").textContent = stats.owned;
-  document.getElementById("selling-count").textContent = stats.selling;
+    // Affichage du profil utilisateur
+    document.getElementById("user-name").textContent = user.username;
+    document.getElementById("user-email").textContent = user.email;
+    document.querySelector(".avatar").textContent = user.username.charAt(0).toUpperCase();
 
-  const sampleMovies = [
-    { title: "Inception", poster: "https://image.tmdb.org/t/p/w300/AjQlc1Vjs2u9l0a2N2nZiyWwZqD.jpg" },
-    { title: "Interstellar", poster: "https://image.tmdb.org/t/p/w300/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" },
-    { title: "Tenet", poster: "https://image.tmdb.org/t/p/w300/k68nPLbIST6NP96JmTxmZijEvCA.jpg" },
-  ];
-
-  const watchedContainer = document.getElementById("watched-movies");
-  sampleMovies.forEach((movie) => {
-    const card = document.createElement("div");
-    card.className = "movie-card";
-    card.innerHTML = `
-      <img src="${movie.poster}" alt="${movie.title}">
-      <div class="movie-title">${movie.title}</div>
-    `;
-    watchedContainer.appendChild(card);
-  });
-
-  // Gestion des onglets
-  const tabs = document.querySelectorAll(".tab-btn");
-  const contents = document.querySelectorAll(".tab-content");
-
-  tabs.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      tabs.forEach((b) => b.classList.remove("active"));
-      contents.forEach((c) => c.classList.remove("active"));
-      btn.classList.add("active");
-      const target = btn.getAttribute("data-tab");
-      document.getElementById(`tab-${target}`).classList.add("active");
+    // Exemple : afficher les films vus
+    const watchedContainer = document.getElementById("watched-movies");
+    watchedContainer.innerHTML = "";
+    films.vu.forEach((movie) => {
+      const card = document.createElement("div");
+      card.className = "movie-card";
+      card.innerHTML = `
+        <img src="${movie.poster_url}" alt="${movie.title}">
+        <div class="movie-title">${movie.title}</div>
+      `;
+      watchedContainer.appendChild(card);
     });
-  });
+
+    // Exemple : afficher les films à voir
+    const watchlistContainer = document.getElementById("watchlist-movies");
+    watchlistContainer.innerHTML = "";
+    films.envie.forEach((movie) => {
+      const card = document.createElement("div");
+      card.className = "movie-card";
+      card.innerHTML = `
+        <img src="${movie.poster_url}" alt="${movie.title}">
+        <div class="movie-title">${movie.title}</div>
+      `;
+      watchlistContainer.appendChild(card);
+    });
+  } catch (err) {
+    console.error("Erreur lors du chargement du profil :", err);
+    window.location.href = "login-register.html";
+  }
 });
