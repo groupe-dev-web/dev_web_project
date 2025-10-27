@@ -18,20 +18,53 @@ registerTab.addEventListener("click", () => {
   loginForm.classList.remove("active");
 });
 
-// --- Simulation de login/register sans alert ---
+// --- Connexion réelle ---
 if (loginForm) {
-  loginForm.addEventListener("submit", (e) => {
+  loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    // Redirection directe
-    window.location.href = "profile.html";
+
+    const email = document.getElementById("login-email").value.trim();
+    const password = document.getElementById("login-password").value.trim();
+
+    const response = await fetch("../backend/auth.php?action=login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+      credentials: "include", // permet d'envoyer et recevoir les cookies de session
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      window.location.href = "profile.html";
+    } else {
+      alert(data.message);
+    }
   });
 }
 
+// --- Inscription réelle ---
 if (registerForm) {
-  registerForm.addEventListener("submit", (e) => {
+  registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    // Redirection directe
-    window.location.href = "profile.html";
-  });
 
+    const username = document.getElementById("register-username").value.trim();
+    const email = document.getElementById("register-email").value.trim();
+    const password = document.getElementById("register-password").value.trim();
+
+    const response = await fetch("../backend/auth.php?action=register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email, password }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      alert("Inscription réussie ! Vous pouvez maintenant vous connecter.");
+      loginTab.click();
+    } else {
+      alert(data.message);
+    }
+  });
 }
