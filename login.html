@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Disney Lovers | Login</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <video autoplay muted loop playsinline id="bg-video">
+  <source src="nezha-and-the-goddess-nuwa-moewalls-com.mp4" type="video/mp4">
+  </video>
+
+<div class="login-container">
+  <!-- ton contenu login-box ici -->
+</div>
+
+  <div class="login-container">
+    <div class="login-box">
+      <h1 class="logo">DISNEY LOVERS</h1>
+
+      <div class="tabs">
+        <button class="tab active" id="login-tab">Login</button>
+        <button class="tab" id="register-tab">Register</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="form active">
+        <input type="email" id="login-email" placeholder="Email" required />
+        <input type="password" id="login-password" placeholder="Password" required />
+        <button type="submit" class="btn">Login</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="form">
+        <input type="text" id="register-name" placeholder="Full Name" required />
+        <input type="email" id="register-email" placeholder="Email" required />
+        <input type="password" id="register-password" placeholder="Password" required />
+        <button type="submit" class="btn">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

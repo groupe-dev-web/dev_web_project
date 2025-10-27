@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to bottom right, #020617, #0f172a 60%, #1e1b4b);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: rgba(2, 6, 23, 0.9);
+  box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.navbar .logo {
+  font-weight: 600;
+  color: #60a5fa;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+
+nav a {
+  color: #94a3b8;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a.active,
+nav a:hover {
+  color: #60a5fa;
+}
+
+/* ===== BOUTON LOGOUT ===== */
+#logout {
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.3s;
+}
+
+#logout:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* ===== SECTION DÉTAILS ===== */
+.details-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 80px 60px;
+  gap: 50px;
+}
+
+.movie-poster img {
+  width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(96, 165, 250, 0.5), 0 0 40px rgba(147, 51, 234, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-poster img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 35px rgba(96, 165, 250, 0.8), 0 0 50px rgba(147, 51, 234, 0.4);
+}
+
+/* ===== INFOS FILM ===== */
+.movie-info {
+  max-width: 600px;
+  animation: fadeSlideUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+.movie-info h1 {
+  margin-top: 0;
+  color: #60a5fa;
+  font-size: 2.2rem;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.4);
+}
+
+.meta {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* ===== STATUT ===== */
+.status {
+  margin-top: 25px;
+}
+
+.status select {
+  background-color: rgba(15, 23, 42, 0.8);
+  color: white;
+  border: 1px solid rgba(96, 165, 250, 0.4);
+  padding: 8px;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.status select:focus {
+  border: 1px solid #60a5fa;
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.4);
+}
+
+/* ===== PROPRIÉTAIRES ===== */
+.owners {
+  margin-top: 25px;
+}
+
+.owners ul {
+  list-style: none;
+  padding: 0;
+}
+
+.owners li {
+  padding: 6px 0;
+  color: #a78bfa;
+  transition: color 0.3s;
+}
+
+.owners li:hover {
+  color: #60a5fa;
+}
+
+/* ===== ACTIONS ===== */
+.actions {
+  margin-top: 35px;
+}
+
+#backBtn {
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.3s;
+}
+
+#backBtn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 25px;
+  border-top: 1px solid rgba(96, 165, 250, 0.2);
+  color: #94a3b8;
+  background: rgba(2, 6, 23, 0.9);
+  margin-top: 60px;
+  box-shadow: 0 -5px 20px rgba(96, 165, 250, 0.1);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

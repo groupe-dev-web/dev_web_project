@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to bottom, #020617, #0f172a, #020617);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== NAVBAR IDENTIQUE À HOME ===== */
+#header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(2, 6, 23, 0.95);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+}
+
+/* Logo */
+.logo {
+  font-weight: 600;
+  color: #60a5fa;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+
+/* Liens de navigation */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: #9ca3af;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  color: #60a5fa;
+}
+
+/* Barre de recherche */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.25rem 0.5rem;
+  gap: 0.5rem;
+}
+
+.search-bar input {
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  font-size: 0.9rem;
+  width: 160px;
+}
+
+.search-bar input::placeholder {
+  color: #9ca3af;
+}
+
+.search-bar button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.search-bar button:hover {
+  color: #60a5fa;
+}
+
+/* Section utilisateur */
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+.btn-gradient:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* ===== CONTENU PRINCIPAL ===== */
+main {
+  padding-top: 120px;
+  padding-bottom: 60px;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+main h1 {
+  color: #60a5fa;
+  font-size: 2.3rem;
+  margin-bottom: 1rem;
+  animation: fadeSlideUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+main h3 {
+  color: #9ca3af;
+  font-weight: 400;
+  margin-bottom: 2.5rem;
+  animation: fadeSlideUp 1s ease forwards;
+  opacity: 0;
+  animation-delay: 0.2s;
+}
+
+/* Grille de films */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Carte de film */
+.movie-card {
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: fadeSlideUp 0.7s ease forwards;
+  opacity: 0;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-bottom: 2px solid rgba(96, 165, 250, 0.4);
+}
+
+.movie-card h3 {
+  margin: 0.75rem;
+  color: #bfdbfe;
+  font-size: 1.1rem;
+}
+
+.movie-card p {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  margin: 0 0.75rem 1rem;
+}
+
+/* 🌟 Effet de glow au survol */
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(96, 165, 250, 0.8), 0 0 40px rgba(147, 51, 234, 0.4);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid #1e293b;
+  color: #64748b;
+  background: rgba(2, 6, 23, 0.9);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

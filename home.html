@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Disney Lovers</title>
+  <link rel="stylesheet" href="home.css" />
+  <script defer src="home.js"></script>
+  <link rel="icon" href="favicon.ico" />
+</head>
+<body>
+  <div class="layout-container">
+
+    <!-- Navigation -->
+    <header id="header">
+      <nav class="nav container">
+        <div class="nav-content">
+          
+          <!-- Logo -->
+          <div class="logo">Disney Lovers</div>
+
+          <!-- Navigation principale -->
+          <div class="nav-links">
+            <a href="home.html" class="nav-link active">Home</a>
+            <a href="movies.html" class="nav-link">All Movies</a>
+            <a href="profile.html" class="nav-link">My Collection</a>
+          </div>
+
+          <!-- Barre de recherche -->
+          <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search a movie..." />
+            <button id="search-btn">🔍</button>
+          </div>
+
+          <!-- Section utilisateur -->
+          <div class="user-section">
+            <button id="login-btn" class="btn-gradient">Sign In</button>
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <!-- Contenu principal -->
+    <main>
+      <section id="universes" class="section">
+        <h1>Explore the Magic of <br/> Disney Universes</h1>
+        <h3>Track your favorite movies, manage your collection, and discover <br/> films across Disney, Pixar, Marvel, Star Wars, and more.</h3>
+
+        <div class="universes-grid">
+          <div class="universe-card" style="--color:#1E3A8A;">Disney</div>
+          <div class="universe-card" style="--color:#0891B2;">Pixar</div>
+          <div class="universe-card" style="--color:#DC2626;">Marvel</div>
+          <div class="universe-card" style="--color:#000000;">Star Wars</div>
+          <div class="universe-card" style="--color:#059669;">Avatar</div>
+          <div class="universe-card" style="--color:#7C3AED;">20th Century</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 Disney Lovers. Built for Disney fans.</p>
+    </footer>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Disney Collection | Movie Details</title>
+  <link rel="stylesheet" href="movie-details.css" />
+  <script defer src="movie-details.js"></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">Disney Collection</div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="movies.html">All Movies</a>
+      <a href="profile.html">My Collection</a>
+    </nav>
+    <button id="logout">Logout</button>
+  </header>
+
+  <main class="details-container">
+    <div class="movie-poster">
+      <img id="movieImage" src="assets/default-poster.jpg" alt="Movie poster" />
+    </div>
+
+    <div class="movie-info">
+      <h1 id="movieTitle">Movie Title</h1>
+      <p class="meta">
+        <span id="movieUniverse">Universe</span> • 
+        <span id="movieCategory">Category</span> • 
+        <span id="movieDate">Release Date</span>
+      </p>
+      <p id="movieSynopsis">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis lacus
+        sit amet nisl faucibus porttitor. Morbi ut neque sed sem tempor
+        sagittis.
+      </p>
+
+      <div class="status">
+        <label for="statusSelect">Your Status:</label>
+        <select id="statusSelect">
+          <option>Seen</option>
+          <option>Want to see</option>
+          <option>Own (Blu-ray)</option>
+          <option>Want to sell</option>
+        </select>
+      </div>
+
+      <div class="owners">
+        <h3>Users owning this movie:</h3>
+        <ul id="ownersList">
+          <li>Alice (selling)</li>
+          <li>Bob</li>
+          <li>Emma</li>
+        </ul>
+      </div>
+
+      <div class="actions">
+        <button id="backBtn">← Back to Movies</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Disney Lovers. Built for Disney fans.</p>
+  </footer>
+</body>
+</html>
