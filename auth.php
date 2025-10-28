@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 0);
+error_reporting(0);
 session_start();
 header("Content-Type: application/json");
 include 'config.php';
@@ -19,7 +21,8 @@ if ($action === 'login') {
     $stmt->execute([$email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user && password_verify($password, $user['password_hash'])) {
+    // Vérification en clair
+    if ($user && $password === $user['password_hash']) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['email'] = $user['email'];
@@ -33,7 +36,8 @@ if ($action === 'login') {
                 "email" => $user['email']
             ]
         ]);
-    } else {
+    } 
+    else {
         echo json_encode(["success" => false, "message" => "Email ou mot de passe incorrect"]);
     }
 }
@@ -49,11 +53,9 @@ elseif ($action === 'register') {
         exit;
     }
 
-    $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-
     try {
         $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
-        $stmt->execute([$username, $email, $passwordHash]);
+        $stmt->execute([$username, $email, $password]);
         echo json_encode(["success" => true, "message" => "Inscription réussie"]);
     } catch (PDOException $e) {
         echo json_encode(["success" => false, "message" => "Cet email est déjà utilisé"]);
