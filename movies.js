@@ -1,112 +1,118 @@
-// Fake data for demonstration
-const universes = [
-  {
-    name: "Disney",
-    color: "#1E3A8A",
-    movies: [
-      { title: "The Lion King", date: "1994", category: "Classic" },
-      { title: "Frozen", date: "2013", category: "Princess" },
-      { title: "Moana", date: "2016", category: "Adventure" },
-    ],
-  },
-  {
-    name: "Pixar",
-    color: "#0891B2",
-    movies: [
-      { title: "Toy Story", date: "1995", category: "Saga" },
-      { title: "Coco", date: "2017", category: "Musical" },
-      { title: "Inside Out", date: "2015", category: "Emotional" },
-    ],
-  },
-  {
-    name: "Marvel",
-    color: "#DC2626",
-    movies: [
-      { title: "Iron Man", date: "2008", category: "MCU Phase 1" },
-      { title: "Avengers: Endgame", date: "2019", category: "MCU Phase 3" },
-      { title: "Black Panther", date: "2018", category: "Wakanda" },
-    ],
-  },
-  {
-    name: "Star Wars",
-    color: "#000000",
-    movies: [
-      { title: "A New Hope", date: "1977", category: "Saga Skywalker" },
-      { title: "The Force Awakens", date: "2015", category: "Sequel Trilogy" },
-      { title: "Rogue One", date: "2016", category: "Anthology" },
-    ],
-  },
-  {
-    name: "Avatar",
-    color: "#059669",
-    movies: [
-      { title: "Avatar", date: "2009", category: "Pandora" },
-      { title: "Avatar: The Way of Water", date: "2022", category: "Pandora" },
-    ],
-  },
-];
+document.addEventListener("DOMContentLoaded", async () => {
+  const container = document.getElementById("universesContainer");
 
-// Render universes
-const universesContainer = document.getElementById("universesContainer");
+  try {
+    const res = await fetch("./get_movies.php", { credentials: "include" });
+    const data = await res.json();
 
-universes.forEach((universe) => {
-  const universeDiv = document.createElement("div");
-  universeDiv.classList.add("universe");
-  universeDiv.style.borderLeft = `4px solid ${universe.color}`;
+    if (!data.success) {
+      container.innerHTML = `<p class="error">${data.message}</p>`;
+      return;
+    }
 
-  universeDiv.innerHTML = `
-    <div class="universe-header">
-      <h2>${universe.name}</h2>
-      <button class="toggle-btn">+</button>
-    </div>
-    <div class="movies-list"></div>
-  `;
+    const universes = data.data;
 
-  const movieList = universeDiv.querySelector(".movies-list");
+    universes.forEach((universe) => {
+      const universeDiv = document.createElement("div");
+      universeDiv.classList.add("universe");
 
-  universe.movies.forEach((movie) => {
-    const movieCard = document.createElement("div");
-    movieCard.classList.add("movie-card");
+      universeDiv.innerHTML = `
+        <div class="universe-header">
+          <h2>${universe.universe_name}</h2>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="movies-list" style="display:none;"></div>
+      `;
 
-    movieCard.innerHTML = `
-      <h3>${movie.title}</h3>
-      <p class="movie-info">${movie.category} | Released: ${movie.date}</p>
-      <label>Status:</label>
-      <select>
-        <option>Seen</option>
-        <option>Want to see</option>
-        <option>Own (Blu-ray)</option>
-        <option>Want to sell</option>
-      </select>
-      <div class="owner-list">Users owning this: Alice, Bob (selling)</div>
-    `;
-    movieList.appendChild(movieCard);
-  });
+      const movieList = universeDiv.querySelector(".movies-list");
 
-  // Toggle visibility
-  const toggleBtn = universeDiv.querySelector(".toggle-btn");
-  toggleBtn.addEventListener("click", () => {
-    const list = universeDiv.querySelector(".movies-list");
-    const isVisible = list.style.display === "block";
-    list.style.display = isVisible ? "none" : "block";
-    toggleBtn.textContent = isVisible ? "+" : "–";
-  });
+      universe.movies.forEach((movie) => {
+        const movieCard = document.createElement("div");
+        movieCard.classList.add("movie-card");
 
-  universesContainer.appendChild(universeDiv);
+        movieCard.innerHTML = `
+          <div class="movie-info-container">
+            ${
+              movie.poster_url
+                ? `<img src="${movie.poster_url}" alt="${movie.title}" class="poster">`
+                : `<div class="poster placeholder">Image à venir</div>`
+            }
+            <div class="movie-details">
+              <h3>${movie.title}</h3>
+              <p>Sorti le : ${movie.release_date || "—"}</p>
+              <p>${movie.synopsis || "Pas de résumé."}</p>
+              <label>Status :</label>
+              <select class="status-select" data-film-id="${movie.id}">
+                <option value="">—</option>
+                <option value="watched" ${movie.status === "watched" ? "selected" : ""}>Vu</option>
+                <option value="want_to_watch" ${movie.status === "want_to_watch" ? "selected" : ""}>À voir</option>
+                <option value="owned" ${movie.status === "owned" ? "selected" : ""}>Possédé</option>
+                <option value="want_to_sell" ${movie.status === "want_to_sell" ? "selected" : ""}>À vendre</option>
+              </select>
+            </div>
+          </div>
+        `;
+
+        movieList.appendChild(movieCard);
+      });
+
+      const toggleBtn = universeDiv.querySelector(".toggle-btn");
+      const moviesList = universeDiv.querySelector(".movies-list");
+
+      // ouvrir/fermer l’univers
+      toggleBtn.addEventListener("click", () => {
+        const open = moviesList.style.display === "block";
+        moviesList.style.display = open ? "none" : "block";
+        toggleBtn.textContent = open ? "+" : "–";
+        // sauvegarde état dans localStorage
+        localStorage.setItem(`universe_${universe.universe_id}_open`, !open);
+      });
+
+      // restaurer état ouvert/fermé
+      const wasOpen = localStorage.getItem(`universe_${universe.universe_id}_open`) === "true";
+      if (wasOpen) {
+        moviesList.style.display = "block";
+        toggleBtn.textContent = "–";
+      }
+
+      container.appendChild(universeDiv);
+    });
+
+    // --- gestion du changement de statut ---
+    container.addEventListener("change", async (e) => {
+      if (!e.target.classList.contains("status-select")) return;
+      const filmId = e.target.dataset.filmId;
+      const status = e.target.value;
+
+      try {
+        const res = await fetch("./update_user_film.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ film_id: filmId, status }),
+        });
+        const result = await res.json();
+
+        if (!result.success) {
+          alert("Erreur : " + result.message);
+        }
+      } catch (err) {
+        alert("Erreur réseau lors de la mise à jour.");
+      }
+    });
+
+    // --- recherche ---
+    const searchInput = document.getElementById("search-input");
+    searchInput.addEventListener("input", (e) => {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll(".movie-card").forEach((card) => {
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        card.style.display = title.includes(query) ? "block" : "none";
+      });
+    });
+  } catch (err) {
+    container.innerHTML = `<p class="error">Erreur de connexion au serveur</p>`;
+    console.error(err);
+  }
 });
 
-// Search feature
-document.getElementById("searchInput").addEventListener("input", (e) => {
-  const searchValue = e.target.value.toLowerCase();
-  const allMovies = document.querySelectorAll(".movie-card");
-  allMovies.forEach((card) => {
-    const title = card.querySelector("h3").textContent.toLowerCase();
-    card.style.display = title.includes(searchValue) ? "block" : "none";
-  });
-});
-
-// Logout
-document.getElementById("logout").addEventListener("click", () => {
-  alert("Logged out!");
-  window.location.href = "login.html";
-});
