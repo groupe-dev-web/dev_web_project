@@ -31,8 +31,29 @@ document.getElementById("backBtn").addEventListener("click", () => {
   window.location.href = "movies.html";
 });
 
-// Logout button
-document.getElementById("logout").addEventListener("click", () => {
-  alert("Logged out!");
-  window.location.href = "login.html";
-});
+// --- Gestion dynamique du bouton Auth (Sign In / Logout) ---
+
+// on vérifie si l'utilisateur est connecté
+const isLoggedIn = localStorage.getItem("user") !== null;
+
+// On récupère le bouton
+const authBtn = document.getElementById("logout"); // tu peux le renommer "auth-btn" si tu veux
+
+if (authBtn) {
+  if (isLoggedIn) {
+    // --- Utilisateur connecté ---
+    authBtn.textContent = "Logout";
+    authBtn.onclick = () => {
+      // Déconnexion
+      alert("Logged out!");
+      localStorage.removeItem("user"); // facultatif si tu utilises le localStorage
+      window.location.href = "login.html";
+    };
+  } else {
+    // --- Utilisateur non connecté ---
+    authBtn.textContent = "Sign In";
+    authBtn.onclick = () => {
+      window.location.href = "login.html"; // Redirection vers la page de login
+    };
+  }
+}
