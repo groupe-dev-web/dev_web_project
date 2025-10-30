@@ -115,4 +115,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error(err);
   }
 });
-
