@@ -4,83 +4,126 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profil utilisateur</title>
-  <link rel="stylesheet" href="profile.css" />
+  <link rel="stylesheet" href="home.css" /> <!-- Pour header et footer -->
+  <link rel="stylesheet" href="profile.css" /> <!-- Styles spécifiques -->
 </head>
 <body>
-  <div class="profile-container">
-    <!-- Header -->
-    <header class="profile-header">
-      <div class="profile-info">
-        <div class="avatar">U</div>
-        <div>
-          <h1 id="user-name">Mon Profil</h1>
-          <p id="user-email" class="email">user@example.com</p>
+  <div class="layout-container">
+
+    <!-- Header identique à home.html -->
+    <header id="header">
+      <nav class="nav container">
+        <div class="nav-content">
+          <div class="logo">Disney Lovers</div>
+          <div class="nav-links">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="movies.html" class="nav-link">All Movies</a>
+            <a href="profile.html" class="nav-link active">My Collection</a>
+          </div>
+          <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search a movie..." />
+            <button id="search-btn">🔍</button>
+          </div>
+          <div class="user-section">
+            <button id="login-btn" class="btn-gradient">Sign In</button>
+          </div>
         </div>
-      </div>
+      </nav>
     </header>
 
-    <!-- Stats -->
-    <section class="stats-section">
-      <div class="stats-card">
-        <div class="icon bg-green"></div>
-        <div>
-          <p class="stat-value" id="watched-count">0</p>
-          <p class="stat-title">Watched</p>
+    <!-- Contenu principal -->
+    <main style="padding-top: 120px;">
+      <section class="profile-header">
+        <div class="profile-info">
+          <div class="avatar">U</div>
+          <div>
+            <h1 id="user-name">Mon Profil</h1>
+            <p id="user-email" class="email">user@example.com</p>
+          </div>
         </div>
-      </div>
-      <div class="stats-card">
-        <div class="icon bg-red"></div>
-        <div>
-          <p class="stat-value" id="watchlist-count">0</p>
-          <p class="stat-title">Watchlist</p>
-        </div>
-      </div>
-      <div class="stats-card">
-        <div class="icon bg-blue"></div>
-        <div>
-          <p class="stat-value" id="owned-count">0</p>
-          <p class="stat-title">Owned</p>
-        </div>
-      </div>
-      <div class="stats-card">
-        <div class="icon bg-yellow"></div>
-        <div>
-          <p class="stat-value" id="selling-count">0</p>
-          <p class="stat-title">For Sale</p>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Tabs -->
-    <section class="tabs-section">
-      <div class="tabs-header">
-        <button class="tab-btn active" data-tab="watched">Watched</button>
-        <button class="tab-btn" data-tab="watchlist">Watchlist</button>
-        <button class="tab-btn" data-tab="owned">Owned</button>
-        <button class="tab-btn" data-tab="selling">For Sale</button>
-      </div>
+      <section class="stats-section">
+        <div class="stats-card">
+          <div class="icon bg-green"></div>
+          <div>
+            <p class="stat-value" id="watched-count">0</p>
+            <p class="stat-title">Watched</p>
+          </div>
+        </div>
+        <div class="stats-card">
+          <div class="icon bg-red"></div>
+          <div>
+            <p class="stat-value" id="watchlist-count">0</p>
+            <p class="stat-title">Watchlist</p>
+          </div>
+        </div>
+        <div class="stats-card">
+          <div class="icon bg-blue"></div>
+          <div>
+            <p class="stat-value" id="owned-count">0</p>
+            <p class="stat-title">Owned</p>
+          </div>
+        </div>
+        <div class="stats-card">
+          <div class="icon bg-yellow"></div>
+          <div>
+            <p class="stat-value" id="selling-count">0</p>
+            <p class="stat-title">For Sale</p>
+          </div>
+        </div>
+      </section>
 
-      <div class="tabs-content">
-        <div id="tab-watched" class="tab-content active">
-          <p class="empty">You haven't marked any movies as watched yet</p>
-          <div class="movies-grid" id="watched-movies"></div>
+      <section class="tabs-section">
+        <div class="tabs-header">
+          <button class="tab-btn active" data-tab="watched">Watched</button>
+          <button class="tab-btn" data-tab="watchlist">Watchlist</button>
+          <button class="tab-btn" data-tab="owned">Owned</button>
+          <button class="tab-btn" data-tab="selling">For Sale</button>
         </div>
-        <div id="tab-watchlist" class="tab-content">
-          <p class="empty">Your watchlist is empty</p>
-          <div class="movies-grid" id="watchlist-movies"></div>
+
+        <div class="tabs-content">
+          <div id="tab-watched" class="tab-content active">
+            <p class="empty">You haven't marked any movies as watched yet</p>
+            <div class="movies-grid" id="watched-movies"></div>
+          </div>
+          <div id="tab-watchlist" class="tab-content">
+            <p class="empty">Your watchlist is empty</p>
+            <div class="movies-grid" id="watchlist-movies"></div>
+          </div>
+          <div id="tab-owned" class="tab-content">
+            <p class="empty">You don't own any physical copies yet</p>
+            <div class="movies-grid" id="owned-movies"></div>
+          </div>
+          <div id="tab-selling" class="tab-content">
+            <p class="empty">You're not selling any movies</p>
+            <div class="movies-grid" id="selling-movies"></div>
+          </div>
         </div>
-        <div id="tab-owned" class="tab-content">
-          <p class="empty">You don't own any physical copies yet</p>
-          <div class="movies-grid" id="owned-movies"></div>
-        </div>
-        <div id="tab-selling" class="tab-content">
-          <p class="empty">You're not selling any movies</p>
-          <div class="movies-grid" id="selling-movies"></div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </main>
+
+    <!-- Footer identique à home.html -->
+    <footer>
+      <p>© 2025 Disney Lovers. Built for Disney fans.</p>
+    </footer>
   </div>
 
   <script src="profile.js"></script>
+  <script>
+    // Simple switch tabs
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        tabButtons.forEach(b => b.classList.remove("active"));
+        tabContents.forEach(c => c.classList.remove("active"));
+
+        btn.classList.add("active");
+        document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
+      });
+    });
+  </script>
 </body>
 </html>
