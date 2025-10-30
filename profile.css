@@ -1,3 +1,4 @@
+/* ===== BODY ===== */
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -5,7 +6,11 @@ body {
   color: #e2e8f0;
 }
 
+/* ===== PROFILE HEADER ===== */
 .profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: linear-gradient(to bottom, #1e293b, #0f172a);
   border-bottom: 1px solid #1e293b;
   padding: 2rem;
@@ -35,6 +40,7 @@ body {
   color: #94a3b8;
 }
 
+/* ===== STATS ===== */
 .stats-section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -77,6 +83,7 @@ body {
   color: #94a3b8;
 }
 
+/* ===== TABS ===== */
 .tabs-section {
   background: #1e293b;
   border-radius: 1rem;
@@ -148,4 +155,3 @@ body {
   color: #94a3b8;
   margin-bottom: 1rem;
 }
- 
