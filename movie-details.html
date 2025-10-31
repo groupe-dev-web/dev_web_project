@@ -15,44 +15,37 @@
       <a href="movies.html">All Movies</a>
       <a href="profile.html">My Collection</a>
     </nav>
-    <button id="auth-btn">Logout</button>
+    <button id="logout">Logout</button>
   </header>
 
   <main class="details-container">
     <div class="movie-poster">
-      <img id="movieImage" src="assets/default-poster.jpg" alt="Movie poster" />
+      <img id="movieImage" src="default.jpg" alt="Movie poster" />
     </div>
 
     <div class="movie-info">
-      <h1 id="movieTitle">Movie Title</h1>
+      <h1 id="movieTitle">Loading...</h1>
       <p class="meta">
-        <span id="movieUniverse">Universe</span> • 
-        <span id="movieCategory">Category</span> • 
-        <span id="movieDate">Release Date</span>
+        <span id="movieUniverse">—</span> • 
+        <span id="movieCategory">—</span> • 
+        <span id="movieDate">—</span>
       </p>
-      <p id="movieSynopsis">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quis lacus
-        sit amet nisl faucibus porttitor. Morbi ut neque sed sem tempor
-        sagittis.
-      </p>
+      <p id="movieSynopsis">Chargement du synopsis…</p>
 
       <div class="status">
         <label for="statusSelect">Your Status:</label>
-        <select id="statusSelect">
-          <option>Seen</option>
-          <option>Want to see</option>
-          <option>Own (Blu-ray)</option>
-          <option>Want to sell</option>
+        <select id="statusSelect" data-film-id="">
+          <option value="">—</option>
+          <option value="watched">Seen</option>
+          <option value="want_to_watch">Want to see</option>
+          <option value="owned">Own (Blu-ray)</option>
+          <option value="want_to_sell">Want to sell</option>
         </select>
       </div>
 
       <div class="owners">
-        <h3>Users owning this movie:</h3>
-        <ul id="ownersList">
-          <li>Alice (selling)</li>
-          <li>Bob</li>
-          <li>Emma</li>
-        </ul>
+        <h3>Users owning / selling this movie:</h3>
+        <ul id="ownersList"></ul>
       </div>
 
       <div class="actions">
