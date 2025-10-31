@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("universesContainer");
 
+  // 🟢 1. Récupère le paramètre d’univers dans l’URL (ex: movies.html?universe=Pixar)
+  const params = new URLSearchParams(window.location.search);
+  const selectedUniverse = params.get("universe");
+
   try {
     const res = await fetch("./get_movies.php", { credentials: "include" });
     const data = await res.json();
@@ -26,6 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const movieList = universeDiv.querySelector(".movies-list");
 
+      // --- génération des cartes films ---
       universe.movies.forEach((movie) => {
         const movieCard = document.createElement("div");
         movieCard.classList.add("movie-card");
@@ -53,26 +58,42 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
         `;
 
+        // 🟣 Redirection vers la page de détails du film
+        movieCard.addEventListener("click", (e) => {
+          if (e.target.classList.contains("status-select")) return;
+          window.location.href = `movie-details.html?id=${movie.id}`;
+        });
+
         movieList.appendChild(movieCard);
       });
 
+      // --- gestion du bouton + / - ---
       const toggleBtn = universeDiv.querySelector(".toggle-btn");
       const moviesList = universeDiv.querySelector(".movies-list");
 
-      // ouvrir/fermer l’univers
       toggleBtn.addEventListener("click", () => {
         const open = moviesList.style.display === "block";
         moviesList.style.display = open ? "none" : "block";
         toggleBtn.textContent = open ? "+" : "–";
-        // sauvegarde état dans localStorage
         localStorage.setItem(`universe_${universe.universe_id}_open`, !open);
       });
 
-      // restaurer état ouvert/fermé
+      // 🟡 2. Gestion de l’état ouvert / univers sélectionné
       const wasOpen = localStorage.getItem(`universe_${universe.universe_id}_open`) === "true";
-      if (wasOpen) {
+      const isSelected =
+        selectedUniverse &&
+        universe.universe_name.toLowerCase() === selectedUniverse.toLowerCase();
+
+      if (wasOpen || isSelected) {
         moviesList.style.display = "block";
         toggleBtn.textContent = "–";
+
+        // 🔵 Fait défiler jusqu’à l’univers sélectionné
+        if (isSelected) {
+          setTimeout(() => {
+            universeDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 300);
+        }
       }
 
       container.appendChild(universeDiv);
