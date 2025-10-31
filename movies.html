@@ -6,6 +6,17 @@
   <title>Disney Lovers | Movies</title>
   <link rel="stylesheet" href="movies.css" />
   <script defer src="movies.js"></script>
+  <style>
+    /* Ajout simple pour rendre les cartes cliquables */
+    .movie-card {
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .movie-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
 <header id="header">
@@ -28,10 +39,8 @@
   </nav>
 </header>
 
-
   <main class="container">
     <h1>All Disney Lovers</h1>
-
     <div id="universesContainer" class="universes"></div>
   </main>
 
